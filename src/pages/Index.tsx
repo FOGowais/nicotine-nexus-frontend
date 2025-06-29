@@ -36,7 +36,7 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <Navigation onContactClick={handleContactClick} />
-      <main ref={scrollRef} data-scroll-container>
+      <main ref={scrollRef}>
         <EnhancedHero onContactClick={handleContactClick} />
         <MetricsCounter />
         <EnhancedOEMCapabilities />

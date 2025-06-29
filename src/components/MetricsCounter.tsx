@@ -17,30 +17,32 @@ const MetricsCounter = () => {
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return;
+    if (prefersReducedMotion || !metricsRef.current) return;
 
-    const counters = metricsRef.current?.querySelectorAll('.counter-value');
+    const counters = metricsRef.current.querySelectorAll('.counter-value');
     
-    counters?.forEach((counter, index) => {
-      const target = metrics[index].value;
-      const isDecimal = target % 1 !== 0;
-      
-      ScrollTrigger.create({
-        trigger: counter,
-        start: "top 80%",
-        onEnter: () => {
+    // Single ScrollTrigger for all counters
+    ScrollTrigger.create({
+      trigger: metricsRef.current,
+      start: "top 80%",
+      onEnter: () => {
+        counters.forEach((counter, index) => {
+          const target = metrics[index].value;
+          const isDecimal = target % 1 !== 0;
+          
           gsap.to(counter, {
             innerText: target,
-            duration: 1.8,
-            ease: "power1.out",
+            duration: 2,
+            ease: "power2.out",
+            delay: index * 0.2,
             snap: isDecimal ? { innerText: 0.1 } : { innerText: 1 },
             onUpdate: function() {
               const currentValue = parseFloat(this.targets()[0].innerText);
               counter.innerHTML = isDecimal ? currentValue.toFixed(1) : Math.ceil(currentValue).toString();
             }
           });
-        }
-      });
+        });
+      }
     });
 
     return () => {
