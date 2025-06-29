@@ -1,12 +1,48 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React, { useState } from 'react';
+import Preloader from '../components/Preloader';
+import Navigation from '../components/Navigation';
+import Hero from '../components/Hero';
+import OEMCapabilities from '../components/OEMCapabilities';
+import ProductPortfolio from '../components/ProductPortfolio';
+import ComplianceSection from '../components/ComplianceSection';
+import AboutSection from '../components/AboutSection';
+import ContactModal from '../components/ContactModal';
+import Footer from '../components/Footer';
 
 const Index = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+
+  const handlePreloaderComplete = () => {
+    setIsLoading(false);
+  };
+
+  const handleContactClick = () => {
+    setIsContactModalOpen(true);
+  };
+
+  const handleContactClose = () => {
+    setIsContactModalOpen(false);
+  };
+
+  if (isLoading) {
+    return <Preloader onComplete={handlePreloaderComplete} />;
+  }
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen">
+      <Navigation onContactClick={handleContactClick} />
+      <Hero onContactClick={handleContactClick} />
+      <OEMCapabilities />
+      <ProductPortfolio />
+      <ComplianceSection />
+      <AboutSection />
+      <Footer onContactClick={handleContactClick} />
+      <ContactModal 
+        isOpen={isContactModalOpen} 
+        onClose={handleContactClose} 
+      />
     </div>
   );
 };
