@@ -1,9 +1,10 @@
-
 import React, { useState } from 'react';
 import { Button } from './ui/button';
+import { useScrollDirection } from '../hooks/useScrollDirection';
 
 const Navigation = ({ onContactClick }: { onContactClick: () => void }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const scrollDirection = useScrollDirection();
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -14,7 +15,9 @@ const Navigation = ({ onContactClick }: { onContactClick: () => void }) => {
   };
 
   return (
-    <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-white/20 z-40">
+    <nav className={`fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-white/20 z-40 transition-transform duration-300 ${
+      scrollDirection === 'down' ? '-translate-y-full' : 'translate-y-0'
+    }`}>
       <div className="container-max flex items-center justify-between py-4 px-6">
         <div className="flex items-center space-x-2">
           <div className="w-8 h-8 bg-accent-blue rounded-lg flex items-center justify-center">
