@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const metrics = [
   { label: 'Years Experience', value: 15, suffix: '+' },
-  { label: 'Million Pouches/Month', value: 50, suffix: 'M' },
+  { label: 'Pouches/Month', value: 5, suffix: 'M' },
   { label: 'Quality Control', value: 99.8, suffix: '%' },
   { label: 'Countries Served', value: 25, suffix: '+' }
 ];

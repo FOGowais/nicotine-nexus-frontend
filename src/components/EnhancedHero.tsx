@@ -43,9 +43,9 @@ const EnhancedHero = ({
           <div className="text-center">
             <div className="mb-6">
               <h1 className="text-5xl md:text-7xl font-bold mb-4" data-animate="slide-up">
-                <span className="block text-deep-navy">Premium Nicotine Pouches</span>
+                <span className="block text-deep-navy">Crafted by Experts</span>
                 <span className="block text-accent-blue relative">
-                  Made for Your Brand
+                  Branded by You
                   <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-accent-blue"></div>
                 </span>
               </h1>
