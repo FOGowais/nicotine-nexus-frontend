@@ -7,6 +7,7 @@ import EnhancedHero from '../components/EnhancedHero';
 import MetricsCounter from '../components/MetricsCounter';
 import EnhancedOEMCapabilities from '../components/EnhancedOEMCapabilities';
 import ProductPortfolio from '../components/ProductPortfolio';
+import VideoShowcase from '../components/VideoShowcase';
 import ComplianceSection from '../components/ComplianceSection';
 import AboutSection from '../components/AboutSection';
 import ContactModal from '../components/ContactModal';
@@ -41,6 +42,7 @@ const Index = () => {
         <MetricsCounter />
         <EnhancedOEMCapabilities />
         <ProductPortfolio />
+        <VideoShowcase />
         <ComplianceSection />
         <AboutSection />
         <Footer onContactClick={handleContactClick} />
