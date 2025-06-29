@@ -1,9 +1,11 @@
 
 import React, { useState } from 'react';
-import Preloader from '../components/Preloader';
+import EnhancedPreloader from '../components/EnhancedPreloader';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import Navigation from '../components/Navigation';
-import Hero from '../components/Hero';
-import OEMCapabilities from '../components/OEMCapabilities';
+import EnhancedHero from '../components/EnhancedHero';
+import MetricsCounter from '../components/MetricsCounter';
+import EnhancedOEMCapabilities from '../components/EnhancedOEMCapabilities';
 import ProductPortfolio from '../components/ProductPortfolio';
 import ComplianceSection from '../components/ComplianceSection';
 import AboutSection from '../components/AboutSection';
@@ -13,6 +15,7 @@ import Footer from '../components/Footer';
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const { scrollRef } = useScrollAnimation();
 
   const handlePreloaderComplete = () => {
     setIsLoading(false);
@@ -27,18 +30,21 @@ const Index = () => {
   };
 
   if (isLoading) {
-    return <Preloader onComplete={handlePreloaderComplete} />;
+    return <EnhancedPreloader onComplete={handlePreloaderComplete} />;
   }
 
   return (
     <div className="min-h-screen">
       <Navigation onContactClick={handleContactClick} />
-      <Hero onContactClick={handleContactClick} />
-      <OEMCapabilities />
-      <ProductPortfolio />
-      <ComplianceSection />
-      <AboutSection />
-      <Footer onContactClick={handleContactClick} />
+      <main ref={scrollRef} data-scroll-container>
+        <EnhancedHero onContactClick={handleContactClick} />
+        <MetricsCounter />
+        <EnhancedOEMCapabilities />
+        <ProductPortfolio />
+        <ComplianceSection />
+        <AboutSection />
+        <Footer onContactClick={handleContactClick} />
+      </main>
       <ContactModal 
         isOpen={isContactModalOpen} 
         onClose={handleContactClose} 
