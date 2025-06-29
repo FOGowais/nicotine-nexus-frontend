@@ -1,9 +1,7 @@
-
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Button } from './ui/button';
 import { useSimpleAnimations } from '../hooks/useSimpleAnimations';
-
 const EnhancedHero = ({
   onContactClick
 }: {
@@ -13,7 +11,6 @@ const EnhancedHero = ({
     containerRef
   } = useSimpleAnimations();
   const glowRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
@@ -29,13 +26,11 @@ const EnhancedHero = ({
       });
     }
   }, []);
-
-  return (
-    <section ref={containerRef} className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20" data-scroll-section>
+  return <section ref={containerRef} className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20" data-scroll-section>
       {/* Simplified glow background */}
       <div ref={glowRef} className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 opacity-10" style={{
-        background: 'radial-gradient(circle at center, rgba(10, 132, 255, 0.3) 0%, transparent 70%)'
-      }} />
+      background: 'radial-gradient(circle at center, rgba(10, 132, 255, 0.3) 0%, transparent 70%)'
+    }} />
       
       <div className="container-max relative z-10 text-center px-6">
         <div className="max-w-4xl mx-auto">
@@ -49,34 +44,17 @@ const EnhancedHero = ({
                   <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-accent-blue"></div>
                 </span>
               </h1>
-              <p className="text-xl text-cool-grey mb-8 max-w-2xl mx-auto" data-animate="slide-up">
-                End-to-end OEM • 5M pouches/month • 99.8% Quality Control
-              </p>
+              
             </div>
 
             {/* Certification Badges */}
-            <div className="flex justify-center space-x-6 mb-12" data-animate="slide-up">
-              {['ISO 9001', 'GMP', 'FDA'].map(badge => (
-                <div key={badge} className="glass-card px-4 py-2 hover:transform hover:scale-105 transition-all duration-200">
-                  <span className="text-sm font-medium text-accent-blue">{badge}</span>
-                </div>
-              ))}
-            </div>
+            
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6" data-animate="slide-up">
-              <Button onClick={onContactClick} className="btn-primary text-lg px-10 py-5 hover:scale-105 transition-transform duration-200">
-                Request Quote & Samples
-              </Button>
-              <Button className="border-2 border-accent-blue text-accent-blue bg-transparent px-10 py-5 rounded-full font-medium text-lg transition-all duration-300 hover:bg-accent-blue hover:text-white hover:scale-105 focus:outline-none">
-                Schedule Factory Tour
-              </Button>
-            </div>
+            
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default EnhancedHero;
