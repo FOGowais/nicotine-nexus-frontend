@@ -1,5 +1,7 @@
+
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+
 const images = [{
   src: '/lovable-uploads/background.png',
   className: 'parallax bg-img',
@@ -191,14 +193,17 @@ const images = [{
     distance: 4200
   }
 }];
-const EnhancedHero = () => {
+
+const EnhancedHero = ({ onContactClick }: { onContactClick: () => void }) => {
   const mainRef = useRef(null);
   const parallaxRefs = useRef([]);
+
   useEffect(() => {
     const parallaxEls = parallaxRefs.current;
     let xValue = 0,
       yValue = 0,
       rotateDegree = 0;
+
     function update(cursorPosition) {
       parallaxEls.forEach(el => {
         if (!el) return;
@@ -211,6 +216,7 @@ const EnhancedHero = () => {
         el.style.transform = `perspective(2300px) translateZ(${zValue * speedz}px) rotateY(${rotateDegree * rotateSpeed}deg) translateX(calc(-50% + ${-xValue * speedx}px)) translateY(calc(-50% + ${yValue * speedy}px))`;
       });
     }
+
     update(0);
 
     // GSAP entrance animation
@@ -220,6 +226,7 @@ const EnhancedHero = () => {
         if (el) el.style.transition = '0.45s cubic-bezier(0.2, 0.49, 0.32, 0.99)';
       });
     }, timeline.endTime() * 1000);
+
     Array.from(parallaxEls).filter(el => el && !el.classList.contains('text')).forEach(el => {
       timeline.from(el, {
         top: `${el.offsetHeight / 2 + +el.dataset.distance}px`,
@@ -227,17 +234,25 @@ const EnhancedHero = () => {
         ease: 'power3.out'
       }, '1');
     });
-    timeline.from('.text h1', {
-      y: window.innerHeight - document.querySelector('.text h1').getBoundingClientRect().top + 200,
-      duration: 2
-    }, '2.5').from('.text h2', {
-      y: -150,
-      opacity: 0,
-      duration: 1.5
-    }, '3').from('.hide', {
-      opacity: 0,
-      duration: 1.5
-    }, '3');
+
+    const textH1 = document.querySelector('.text h1');
+    const textH2 = document.querySelector('.text h2');
+    
+    if (textH1) {
+      timeline.from('.text h1', {
+        y: window.innerHeight - textH1.getBoundingClientRect().top + 200,
+        duration: 2
+      }, '2.5');
+    }
+    
+    if (textH2) {
+      timeline.from('.text h2', {
+        y: -150,
+        opacity: 0,
+        duration: 1.5
+      }, '3');
+    }
+
     function onMouseMove(e) {
       if (timeline.isActive()) return;
       xValue = e.clientX - window.innerWidth / 2;
@@ -245,28 +260,55 @@ const EnhancedHero = () => {
       rotateDegree = xValue / (window.innerWidth / 2) * 20;
       update(e.clientX);
     }
+
     window.addEventListener('mousemove', onMouseMove);
     return () => window.removeEventListener('mousemove', onMouseMove);
   }, []);
-  return <main ref={mainRef} className="hero-main">
-      {/* Vignette and header are omitted for now */}
-      {images.map((img, i) => <img key={img.className + i} ref={el => parallaxRefs.current[i] = el} src={img.src} className={img.className} data-speedx={img.data.speedx} data-speedy={img.data.speedy} data-speedz={img.data.speedz} data-rotation={img.data.rotation} data-distance={img.data.distance} alt="" style={{
-      pointerEvents: 'none'
-    }} />)}
+
+  return (
+    <main ref={mainRef} className="hero-main">
+      {images.map((img, i) => (
+        <img
+          key={img.className + i}
+          ref={el => parallaxRefs.current[i] = el}
+          src={img.src}
+          className={img.className}
+          data-speedx={img.data.speedx}
+          data-speedy={img.data.speedy}
+          data-speedz={img.data.speedz}
+          data-rotation={img.data.rotation}
+          data-distance={img.data.distance}
+          alt=""
+          style={{ pointerEvents: 'none' }}
+        />
+      ))}
       <div className="text parallax" data-speedx="0.07" data-speedy="0.07" data-speedz="0" data-rotation="0.11">
-      <h2><span style={{
-          whiteSpace: 'nowrap',
-          color: '#FFFFFF',
-          textShadow: '0 2px 8px rgba(10, 24, 61, 0.3)'
-        }}>Crafted by Experts</span></h2>
+        <h2>
+          <span style={{
+            whiteSpace: 'nowrap',
+            color: '#FFFFFF',
+            textShadow: '0 2px 8px rgba(10, 24, 61, 0.3)'
+          }}>
+            Crafted by Experts
+          </span>
+        </h2>
         <h1 style={{
-        color: '#d0f3ea',
-        textShadow: '0 2px 8px rgba(10, 24, 61, 0.3)',
-        fontSize: '6rem'
-      }} className="text-black">
+          color: '#d0f3ea',
+          textShadow: '0 2px 8px rgba(10, 24, 61, 0.3)',
+          fontSize: '6rem'
+        }} className="text-black">
           Branded<br />By<br />You
         </h1>
+        <button 
+          onClick={onContactClick}
+          className="btn-primary text-lg px-10 py-5 mt-8"
+          style={{ position: 'relative', zIndex: 10 }}
+        >
+          Get Started
+        </button>
       </div>
-    </main>;
+    </main>
+  );
 };
+
 export default EnhancedHero;
