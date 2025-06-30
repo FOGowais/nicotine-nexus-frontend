@@ -57,6 +57,7 @@ const EnhancedOEMCapabilities = () => {
           </p>
         </div>
 
+        {/* Simplified Timeline */}
         <div className="relative">
           <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-accent-blue to-sky-glow hidden lg:block opacity-30" />
           
@@ -67,11 +68,13 @@ const EnhancedOEMCapabilities = () => {
                 className={`flex items-center ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} flex-col lg:space-x-12`}
                 data-animate={index % 2 === 0 ? 'slide-right' : 'slide-left'}
               >
+                {/* Simplified Icon */}
                 <div className="lg:absolute lg:left-1/2 lg:transform lg:-translate-x-1/2 w-16 h-16 bg-accent-blue rounded-full flex items-center justify-center text-2xl mb-6 lg:mb-0 z-10 shadow-lg">
                   {capability.icon}
                 </div>
                 
-                <div className={`glass-card p-8 w-full lg:w-5/12 ${index % 2 === 0 ? 'lg:mr-auto' : 'lg:ml-auto'} hover:scale-[1.02] transition-transform duration-200 ease-out`}>
+                {/* Content Card */}
+                <div className={`glass-card p-8 w-full lg:w-5/12 ${index % 2 === 0 ? 'lg:mr-auto' : 'lg:ml-auto'} hover:scale-105 transition-transform duration-300`}>
                   <h3 className="text-2xl font-bold text-deep-navy mb-4">{capability.title}</h3>
                   <p className="text-cool-grey mb-6">{capability.description}</p>
                   

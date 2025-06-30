@@ -60,37 +60,36 @@ const ProductPortfolio = () => {
           </p>
         </div>
 
+        {/* Filter Tabs */}
         <div className="flex justify-center mb-12">
           <div className="bg-white rounded-full p-2 shadow-sm">
             <div className="flex space-x-2">
-              <button className="bg-accent-blue text-white px-6 py-2 rounded-full text-sm font-medium transition-all duration-200">
+              <button className="bg-accent-blue text-white px-6 py-2 rounded-full text-sm font-medium">
                 All Products
               </button>
-              <button className="text-cool-grey px-6 py-2 rounded-full text-sm font-medium hover:text-accent-blue transition-colors duration-200">
+              <button className="text-cool-grey px-6 py-2 rounded-full text-sm font-medium hover:text-accent-blue transition-colors">
                 Tobacco-Free
               </button>
-              <button className="text-cool-grey px-6 py-2 rounded-full text-sm font-medium hover:text-accent-blue transition-colors duration-200">
+              <button className="text-cool-grey px-6 py-2 rounded-full text-sm font-medium hover:text-accent-blue transition-colors">
                 Mint & Menthol
               </button>
-              <button className="text-cool-grey px-6 py-2 rounded-full text-sm font-medium hover:text-accent-blue transition-colors duration-200">
+              <button className="text-cool-grey px-6 py-2 rounded-full text-sm font-medium hover:text-accent-blue transition-colors">
                 Fruit Flavors
               </button>
-              <button className="text-cool-grey px-6 py-2 rounded-full text-sm font-medium hover:text-accent-blue transition-colors duration-200">
+              <button className="text-cool-grey px-6 py-2 rounded-full text-sm font-medium hover:text-accent-blue transition-colors">
                 Specialty Blends
               </button>
             </div>
           </div>
         </div>
 
+        {/* Product Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {products.map((product, index) => (
             <div 
               key={product.name}
-              className="glass-card p-6 hover:scale-[1.02] transition-all duration-200 ease-out cursor-pointer group"
-              style={{ 
-                animationDelay: `${index * 50}ms`,
-                animation: 'fade-up 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards'
-              }}
+              className="glass-card p-6 hover:transform hover:scale-105 transition-all duration-300 cursor-pointer group"
+              style={{ animationDelay: `${index * 100}ms` }}
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="text-3xl">{product.icon}</div>
@@ -110,7 +109,7 @@ const ProductPortfolio = () => {
                 ))}
               </div>
               
-              <button className="w-full bg-white/50 text-cool-grey py-2 rounded-lg text-sm font-medium group-hover:bg-accent-blue group-hover:text-white transition-all duration-200">
+              <button className="w-full bg-white/50 text-cool-grey py-2 rounded-lg text-sm font-medium group-hover:bg-accent-blue group-hover:text-white transition-all duration-300">
                 Request Sample
               </button>
             </div>

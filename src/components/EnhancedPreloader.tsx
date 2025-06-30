@@ -7,30 +7,30 @@ const EnhancedPreloader = ({ onComplete }: { onComplete: () => void }) => {
   const preloaderRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Faster progress animation
+    // Simple progress animation
     const progressTimer = setInterval(() => {
       setProgress(prev => {
-        const newProgress = prev + 4; // Increased increment for faster loading
+        const newProgress = prev + 3;
         if (newProgress >= 100) {
           clearInterval(progressTimer);
           
-          // Faster fade out
+          // Simple fade out
           setTimeout(() => {
             if (preloaderRef.current) {
               gsap.to(preloaderRef.current, {
                 opacity: 0,
-                duration: 0.3, // Faster fade out
-                ease: "power3.out",
+                duration: 0.5,
+                ease: "power2.out",
                 onComplete: onComplete
               });
             }
-          }, 200); // Reduced delay
+          }, 300);
           
           return 100;
         }
         return newProgress;
       });
-    }, 20); // Faster interval
+    }, 30);
 
     return () => clearInterval(progressTimer);
   }, [onComplete]);
@@ -48,7 +48,7 @@ const EnhancedPreloader = ({ onComplete }: { onComplete: () => void }) => {
         
         <div className="w-64 h-1 bg-gray-200 rounded-full overflow-hidden">
           <div 
-            className="h-full bg-accent-blue transition-all duration-100 ease-out"
+            className="h-full bg-accent-blue transition-all duration-300 ease-out"
             style={{ width: `${progress}%` }}
           />
         </div>

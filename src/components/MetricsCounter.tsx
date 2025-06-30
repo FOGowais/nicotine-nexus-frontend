@@ -21,9 +21,10 @@ const MetricsCounter = () => {
 
     const counters = metricsRef.current.querySelectorAll('.counter-value');
     
+    // Single ScrollTrigger for all counters
     ScrollTrigger.create({
       trigger: metricsRef.current,
-      start: "top 85%",
+      start: "top 80%",
       onEnter: () => {
         counters.forEach((counter, index) => {
           const target = metrics[index].value;
@@ -31,9 +32,9 @@ const MetricsCounter = () => {
           
           gsap.to(counter, {
             innerText: target,
-            duration: 1.2, // Faster animation
-            ease: "power3.out", // Smoother easing
-            delay: index * 0.1,
+            duration: 2,
+            ease: "power2.out",
+            delay: index * 0.2,
             snap: isDecimal ? { innerText: 0.1 } : { innerText: 1 },
             onUpdate: function() {
               const currentValue = parseFloat(this.targets()[0].innerText);
