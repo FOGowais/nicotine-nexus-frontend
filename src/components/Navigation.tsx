@@ -1,10 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { useScrollDirection } from '../hooks/useScrollDirection';
 
 const Navigation = ({ onContactClick }: { onContactClick: () => void }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const scrollDirection = useScrollDirection();
+  const [atTop, setAtTop] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setAtTop(window.scrollY === 0);
+    };
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navClass = `fixed top-0 w-full border-b border-white/20 z-40 transition-transform duration-300 ${
+    scrollDirection === 'down' ? '-translate-y-full' : 'translate-y-0'
+  } ${atTop ? 'bg-transparent' : 'bg-white/80 backdrop-blur-md'}`;
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -15,9 +29,7 @@ const Navigation = ({ onContactClick }: { onContactClick: () => void }) => {
   };
 
   return (
-    <nav className={`fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-white/20 z-40 transition-transform duration-300 ${
-      scrollDirection === 'down' ? '-translate-y-full' : 'translate-y-0'
-    }`}>
+    <nav className={navClass}>
       <div className="container-max flex items-center justify-between py-4 px-6">
         <div className="flex items-center space-x-2">
           <div className="w-8 h-8 bg-accent-blue rounded-lg flex items-center justify-center">
