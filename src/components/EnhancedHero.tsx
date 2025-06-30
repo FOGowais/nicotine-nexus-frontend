@@ -1,68 +1,143 @@
 import React, { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { Button } from './ui/button';
-import { useSimpleAnimations } from '../hooks/useSimpleAnimations';
-const EnhancedHero = ({
-  onContactClick
-}: {
-  onContactClick: () => void;
-}) => {
-  const {
-    containerRef
-  } = useSimpleAnimations();
-  const glowRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return;
+import gsap from 'gsap';
 
-    // Simple glow pulse
-    if (glowRef.current) {
-      gsap.to(glowRef.current, {
-        opacity: 0.3,
-        duration: 2,
-        yoyo: true,
-        repeat: -1,
-        ease: "sine.inOut"
+const images = [
+  { src: '/lovable-uploads/background.png', className: 'parallax bg-img', data: { speedx: 0.3, speedy: 0.38, speedz: 0, rotation: 0, distance: 300 } },
+  { src: '/lovable-uploads/fog_7.png', className: 'parallax fog-7', data: { speedx: 0.27, speedy: 0.32, speedz: 0, rotation: 0, distance: 850 } },
+  { src: '/lovable-uploads/mountain_10.png', className: 'parallax mountain-10', data: { speedx: 0.195, speedy: 0.305, speedz: 0, rotation: 0, distance: 1100 } },
+  { src: '/lovable-uploads/fog_6.png', className: 'parallax fog-6', data: { speedx: 0.25, speedy: 0.28, speedz: 0, rotation: 0, distance: 1400 } },
+  { src: '/lovable-uploads/mountain_9.png', className: 'parallax mountain-9', data: { speedx: 0.125, speedy: 0.155, speedz: 0.15, rotation: 0.02, distance: 1700 } },
+  { src: '/lovable-uploads/mountain_8.png', className: 'parallax mountain-8', data: { speedx: 0.1, speedy: 0.11, speedz: 0, rotation: 0.02, distance: 1800 } },
+  { src: '/lovable-uploads/fog_5.png', className: 'parallax fog-5', data: { speedx: 0.16, speedy: 0.105, speedz: 0, rotation: 0, distance: 1900 } },
+  { src: '/lovable-uploads/mountain_7.png', className: 'parallax mountain-7', data: { speedx: 0.1, speedy: 0.1, speedz: 0, rotation: 0.09, distance: 2000 } },
+  // .text is handled separately
+  { src: '/lovable-uploads/mountain_6.png', className: 'parallax mountain-6', data: { speedx: 0.065, speedy: 0.05, speedz: 0.05, rotation: 0.12, distance: 2300 } },
+  { src: '/lovable-uploads/fog_4.png', className: 'parallax fog-4', data: { speedx: 0.135, speedy: 0.04, speedz: 0, rotation: 0, distance: 2400 } },
+  { src: '/lovable-uploads/mountain_5.png', className: 'parallax mountain-5', data: { speedx: 0.08, speedy: 0.03, speedz: 0.13, rotation: 0.1, distance: 2550 } },
+  { src: '/lovable-uploads/fog_3.png', className: 'parallax fog-3', data: { speedx: 0.11, speedy: 0.018, speedz: 0, rotation: 0, distance: 2800 } },
+  { src: '/lovable-uploads/mountain_4.png', className: 'parallax mountain-4', data: { speedx: 0.059, speedy: 0.024, speedz: 0.35, rotation: 0.14, distance: 3200 } },
+  { src: '/lovable-uploads/mountain_3.png', className: 'parallax mountain-3', data: { speedx: 0.04, speedy: 0.018, speedz: 0.32, rotation: 0.05, distance: 3400 } },
+  { src: '/lovable-uploads/fog_2.png', className: 'parallax fog-2', data: { speedx: 0.15, speedy: 0.0115, speedz: 0, rotation: 0, distance: 3600 } },
+  { src: '/lovable-uploads/mountain_2.png', className: 'parallax mountain-2', data: { speedx: 0.0235, speedy: 0.013, speedz: 0.42, rotation: 0.15, distance: 3800 } },
+  { src: '/lovable-uploads/mountain_1.png', className: 'parallax mountain-1', data: { speedx: 0.027, speedy: 0.018, speedz: 0.53, rotation: 0.2, distance: 4000 } },
+  { src: '/lovable-uploads/sun_rays.png', className: 'sun-rays', data: {} },
+  { src: '/lovable-uploads/black_shadow.png', className: 'black-shadow', data: {} },
+  { src: '/lovable-uploads/fog_1.png', className: 'parallax fog-1', data: { speedx: 0.12, speedy: 0.01, speedz: 0, rotation: 0, distance: 4200 } },
+];
+
+const EnhancedHero = () => {
+  const mainRef = useRef(null);
+  const parallaxRefs = useRef([]);
+
+  useEffect(() => {
+    const parallaxEls = parallaxRefs.current;
+    let xValue = 0, yValue = 0, rotateDegree = 0;
+
+    function update(cursorPosition) {
+      parallaxEls.forEach((el) => {
+        if (!el) return;
+        const speedx = parseFloat(el.dataset.speedx || 0);
+        const speedy = parseFloat(el.dataset.speedy || 0);
+        const speedz = parseFloat(el.dataset.speedz || 0);
+        const rotateSpeed = parseFloat(el.dataset.rotation || 0);
+        let isInLeft =
+          parseFloat(getComputedStyle(el).left) < window.innerWidth / 2 ? 1 : -1;
+        let zValue =
+          (cursorPosition - parseFloat(getComputedStyle(el).left)) * isInLeft * 0.1;
+        el.style.transform = `perspective(2300px) translateZ(${zValue * speedz}px) rotateY(${rotateDegree * rotateSpeed}deg) translateX(calc(-50% + ${-xValue * speedx}px)) translateY(calc(-50% + ${yValue * speedy}px))`;
       });
     }
+
+    update(0);
+
+    // GSAP entrance animation
+    let timeline = gsap.timeline();
+    setTimeout(() => {
+      parallaxEls.forEach((el) => {
+        if (el) el.style.transition = '0.45s cubic-bezier(0.2, 0.49, 0.32, 0.99)';
+      });
+    }, timeline.endTime() * 1000);
+    Array.from(parallaxEls)
+      .filter((el) => el && !el.classList.contains('text'))
+      .forEach((el) => {
+        timeline.from(
+          el,
+          {
+            top: `${el.offsetHeight / 2 + +el.dataset.distance}px`,
+            duration: 3.5,
+            ease: 'power3.out',
+          },
+          '1'
+        );
+      });
+    timeline
+      .from(
+        '.text h1',
+        {
+          y:
+            window.innerHeight -
+            document.querySelector('.text h1').getBoundingClientRect().top +
+            200,
+          duration: 2,
+        },
+        '2.5'
+      )
+      .from(
+        '.text h2',
+        {
+          y: -150,
+          opacity: 0,
+          duration: 1.5,
+        },
+        '3'
+      )
+      .from(
+        '.hide',
+        {
+          opacity: 0,
+          duration: 1.5,
+        },
+        '3'
+      );
+
+    function onMouseMove(e) {
+      if (timeline.isActive()) return;
+      xValue = e.clientX - window.innerWidth / 2;
+      yValue = e.clientY - window.innerHeight / 2;
+      rotateDegree = (xValue / (window.innerWidth / 2)) * 20;
+      update(e.clientX);
+    }
+
+    window.addEventListener('mousemove', onMouseMove);
+    return () => window.removeEventListener('mousemove', onMouseMove);
   }, []);
-  return <section ref={containerRef} className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20" data-scroll-section>
-      {/* Background Image with Filters */}
-      <div className="absolute inset-0 z-0">
-        <img src="/lovable-uploads/949322c2-03fa-48e5-9069-437c9c91e1fe.png" alt="Mountain landscape background" className="w-full h-full object-cover" />
-        {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-black/40"></div>
-        {/* Additional gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60"></div>
+
+  return (
+    <main ref={mainRef} className="hero-main">
+      {/* Vignette and header are omitted for now */}
+      {images.map((img, i) => (
+        <img
+          key={img.className + i}
+          ref={el => parallaxRefs.current[i] = el}
+          src={img.src}
+          className={img.className}
+          data-speedx={img.data.speedx}
+          data-speedy={img.data.speedy}
+          data-speedz={img.data.speedz}
+          data-rotation={img.data.rotation}
+          data-distance={img.data.distance}
+          alt=""
+          style={{ pointerEvents: 'none' }}
+        />
+      ))}
+      <div className="text parallax" data-speedx="0.07" data-speedy="0.07" data-speedz="0" data-rotation="0.11">
+      <h2><span style={{ whiteSpace: 'nowrap', color: '#FFFFFF', textShadow: '0 2px 8px rgba(10, 24, 61, 0.3)' }}>Crafted by Experts</span></h2>
+        <h1 style={{ color: '#d0f3ea', textShadow: '0 2px 8px rgba(10, 24, 61, 0.3)', fontSize: '6rem' }}>
+          Branded<br />By<br />You
+        </h1>
       </div>
-
-      {/* Simplified glow background */}
-      <div ref={glowRef} className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 opacity-10 z-1" style={{
-      background: 'radial-gradient(circle at center, rgba(10, 132, 255, 0.3) 0%, transparent 70%)'
-    }} />
-      
-      <div className="container-max relative z-10 text-center px-6">
-        <div className="max-w-4xl mx-auto">
-          {/* Centered Content */}
-          <div className="text-center">
-            <div className="mb-6">
-              <h1 className="text-5xl md:text-7xl font-bold mb-4 text-white drop-shadow-2xl" data-animate="slide-up">
-                <span className="block">Crafted by Experts</span>
-                <span className="block text-white relative">
-                  Branded by You
-                  
-                </span>
-              </h1>
-            </div>
-
-            {/* Certification Badges */}
-            
-
-            {/* CTAs */}
-            
-          </div>
-        </div>
-      </div>
-    </section>;
+    </main>
+  );
 };
+
 export default EnhancedHero;
