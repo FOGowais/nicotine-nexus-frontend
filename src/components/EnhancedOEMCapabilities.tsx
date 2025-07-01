@@ -7,8 +7,7 @@ const capabilities = [
     title: 'Custom Formulation',
     description: 'Proprietary nicotine blends, flavor profiles, and strength variations tailored to your market requirements.',
     features: ['Nicotine salts & extracts', 'Natural & synthetic flavors', 'Strength: 2-20mg/pouch', 'pH optimization'],
-    icon: '🧪',
-    hasVideo: true
+    icon: '🧪'
   },
   {
     title: 'Private Labeling',
@@ -20,8 +19,7 @@ const capabilities = [
     title: 'Quality Assurance',
     description: 'Rigorous testing protocols ensuring product safety, consistency, and regulatory compliance.',
     features: ['Batch testing', 'Microbial analysis', 'Heavy metals screening', 'Stability studies'],
-    icon: '✅',
-    hasVideo: true
+    icon: '✅'
   },
   {
     title: 'Scalable Production',
@@ -33,8 +31,7 @@ const capabilities = [
     title: 'Regulatory Support',
     description: 'Comprehensive regulatory assistance for global market entry and compliance maintenance.',
     features: ['TPD compliance', 'FDA registration', 'Health Canada', 'PMTA support'],
-    icon: '📋',
-    hasVideo: true
+    icon: '📋'
   },
   {
     title: 'Global Logistics',
@@ -43,20 +40,6 @@ const capabilities = [
     icon: '🚚'
   }
 ];
-
-const VideoCard = ({ index }: { index: number }) => {
-  return (
-    <div className={`glass-card p-8 w-full lg:w-5/12 ${index % 2 === 0 ? 'lg:mr-auto' : 'lg:ml-auto'} hover:scale-105 transition-transform duration-300`}>
-      <div className="aspect-video bg-gradient-to-br from-accent-blue/20 to-sky-glow/20 rounded-lg flex items-center justify-center mb-4">
-        <div className="w-16 h-16 bg-accent-blue/30 rounded-full flex items-center justify-center">
-          <div className="w-0 h-0 border-l-[12px] border-l-white border-y-[8px] border-y-transparent ml-1"></div>
-        </div>
-      </div>
-      <h3 className="text-xl font-bold text-deep-navy mb-2">Manufacturing Process</h3>
-      <p className="text-cool-grey text-sm">Watch our advanced production capabilities in action</p>
-    </div>
-  );
-};
 
 const EnhancedOEMCapabilities = () => {
   const { containerRef } = useSimpleAnimations();
@@ -80,42 +63,30 @@ const EnhancedOEMCapabilities = () => {
           
           <div className="space-y-12">
             {capabilities.map((capability, index) => (
-              <div key={capability.title}>
-                {/* Capability Card */}
-                <div 
-                  className={`flex items-center ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} flex-col lg:space-x-12`}
-                  data-animate={index % 2 === 0 ? 'slide-right' : 'slide-left'}
-                >
-                  {/* Icon */}
-                  <div className="lg:absolute lg:left-1/2 lg:transform lg:-translate-x-1/2 w-16 h-16 bg-accent-blue rounded-full flex items-center justify-center text-2xl mb-6 lg:mb-0 z-10 shadow-lg">
-                    {capability.icon}
-                  </div>
-                  
-                  {/* Content Card */}
-                  <div className={`glass-card p-8 w-full lg:w-5/12 ${index % 2 === 0 ? 'lg:mr-auto' : 'lg:ml-auto'} hover:scale-105 transition-transform duration-300`}>
-                    <h3 className="text-2xl font-bold text-deep-navy mb-4">{capability.title}</h3>
-                    <p className="text-cool-grey mb-6">{capability.description}</p>
-                    
-                    <ul className="space-y-2">
-                      {capability.features.map((feature) => (
-                        <li key={feature} className="flex items-center text-sm text-cool-grey">
-                          <div className="w-2 h-2 bg-accent-blue rounded-full mr-3" />
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+              <div 
+                key={capability.title}
+                className={`flex items-center ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} flex-col lg:space-x-12`}
+                data-animate={index % 2 === 0 ? 'slide-right' : 'slide-left'}
+              >
+                {/* Simplified Icon */}
+                <div className="lg:absolute lg:left-1/2 lg:transform lg:-translate-x-1/2 w-16 h-16 bg-accent-blue rounded-full flex items-center justify-center text-2xl mb-6 lg:mb-0 z-10 shadow-lg">
+                  {capability.icon}
                 </div>
-
-                {/* Video Card (for specific capabilities) */}
-                {capability.hasVideo && (
-                  <div 
-                    className={`flex items-center ${index % 2 === 0 ? 'lg:flex-row-reverse' : 'lg:flex-row'} flex-col lg:space-x-12 mt-6`}
-                    data-animate={index % 2 === 0 ? 'slide-left' : 'slide-right'}
-                  >
-                    <VideoCard index={index + 1} />
-                  </div>
-                )}
+                
+                {/* Content Card */}
+                <div className={`glass-card p-8 w-full lg:w-5/12 ${index % 2 === 0 ? 'lg:mr-auto' : 'lg:ml-auto'} hover:scale-105 transition-transform duration-300`}>
+                  <h3 className="text-2xl font-bold text-deep-navy mb-4">{capability.title}</h3>
+                  <p className="text-cool-grey mb-6">{capability.description}</p>
+                  
+                  <ul className="space-y-2">
+                    {capability.features.map((feature) => (
+                      <li key={feature} className="flex items-center text-sm text-cool-grey">
+                        <div className="w-2 h-2 bg-accent-blue rounded-full mr-3" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             ))}
           </div>
