@@ -131,9 +131,25 @@ const EnhancedHero = () => {
         />
       ))}
       <div className="text parallax" data-speedx="0.07" data-speedy="0.07" data-speedz="0" data-rotation="0.11">
-      <h2><span style={{ whiteSpace: 'nowrap', color: '#FFFFFF', textShadow: '0 2px 8px rgba(10, 24, 61, 0.3)' }}>Crafted by Experts</span></h2>
-        <h1 style={{ color: '#d0f3ea', textShadow: '0 2px 8px rgba(10, 24, 61, 0.3)', fontSize: '6rem' }}>
-          Branded<br />By<br />You
+        <h2><span style={{
+          whiteSpace: 'nowrap',
+          color: '#FFFFFF',
+          fontSize: '5rem',
+          textShadow: `0 2px 12px rgba(0,0,0,0.45), 0 0 24px rgba(0,0,0,0.25), 0 1px 2px rgba(0,0,0,0.35)`
+        }}>Crafted by Experts</span></h2>
+        <img
+          src="/lovable-uploads/hero_prod.png"
+          className="parallax hero-prod-img"
+          data-speedx="0.05"
+          data-speedy="0.12"
+          data-speedz="0.2"
+          data-rotation="0.08"
+          data-distance="1000"
+          alt="Hero Product"
+          style={{ display: 'block', margin: '2rem auto 0', maxWidth: '650px', width: '100%', pointerEvents: 'none' }}
+        />
+        <h1 style={{ color: '#b4f4f0', textShadow: '0 2px 8px rgba(10, 24, 61, 0.3)', fontSize: '4rem' }}>
+          Branded By<br />You
         </h1>
       </div>
     </main>

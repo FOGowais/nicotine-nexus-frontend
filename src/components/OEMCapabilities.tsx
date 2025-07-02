@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const capabilities = [
@@ -69,21 +68,45 @@ const OEMCapabilities = () => {
                 <div className="lg:absolute lg:left-1/2 lg:transform lg:-translate-x-1/2 w-16 h-16 bg-accent-blue rounded-full flex items-center justify-center text-2xl mb-6 lg:mb-0 z-10">
                   {capability.icon}
                 </div>
-                
-                {/* Content */}
-                <div className={`glass-card p-8 w-full lg:w-5/12 ${index % 2 === 0 ? 'lg:mr-auto' : 'lg:ml-auto'}`}>
-                  <h3 className="text-2xl font-bold text-deep-navy mb-4">{capability.title}</h3>
-                  <p className="text-cool-grey mb-6">{capability.description}</p>
-                  
-                  <ul className="space-y-2">
-                    {capability.features.map((feature) => (
-                      <li key={feature} className="flex items-center text-sm text-cool-grey">
-                        <div className="w-2 h-2 bg-accent-blue rounded-full mr-3" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                {/* Content and Video for Custom Formulation */}
+                {index === 0 ? (
+                  <>
+                    <div className="glass-card p-8 w-full lg:w-5/12 lg:mr-auto">
+                      <h3 className="text-2xl font-bold text-deep-navy mb-4">{capability.title}</h3>
+                      <p className="text-cool-grey mb-6">{capability.description}</p>
+                      <ul className="space-y-2">
+                        {capability.features.map((feature) => (
+                          <li key={feature} className="flex items-center text-sm text-cool-grey">
+                            <div className="w-2 h-2 bg-accent-blue rounded-full mr-3" />
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    {/* Video: Only on large screens, same width as card */}
+                    <div className="hidden lg:block w-full lg:w-5/12 lg:ml-auto">
+                      <video 
+                        src="/lovable-uploads/fomulation.mp4" 
+                        controls 
+                        className="rounded-xl shadow-lg w-full h-full object-cover"
+                        style={{ minHeight: '90%', maxHeight: '200px', background: '#000' }}
+                      />
+                    </div>
+                  </>
+                ) : (
+                  <div className={`glass-card p-8 w-full lg:w-5/12 ${index % 2 === 0 ? 'lg:mr-auto' : 'lg:ml-auto'}`}>
+                    <h3 className="text-2xl font-bold text-deep-navy mb-4">{capability.title}</h3>
+                    <p className="text-cool-grey mb-6">{capability.description}</p>
+                    <ul className="space-y-2">
+                      {capability.features.map((feature) => (
+                        <li key={feature} className="flex items-center text-sm text-cool-grey">
+                          <div className="w-2 h-2 bg-accent-blue rounded-full mr-3" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             ))}
           </div>
