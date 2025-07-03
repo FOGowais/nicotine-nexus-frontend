@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import { gsap } from 'gsap';
 
@@ -42,7 +41,7 @@ const EnhancedPreloader = ({ onComplete }: { onComplete: () => void }) => {
     >
       <div className="text-center">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-deep-navy mb-2">Corbett Labs</h1>
+          <h1 className="text-4xl font-bold text-deep-navy mb-2">Corbett Industries</h1>
           <p className="text-accent-blue">Premium OEM Manufacturing</p>
         </div>
         

@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const Footer = ({ onContactClick }: { onContactClick: () => void }) => {
@@ -27,7 +26,7 @@ const Footer = ({ onContactClick }: { onContactClick: () => void }) => {
               <div className="w-10 h-10 bg-accent-blue rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold">CL</span>
               </div>
-              <span className="font-bold text-2xl">Corbett Labs</span>
+              <span className="font-bold text-2xl">Corbett Industries</span>
             </div>
             <p className="text-white/80 mb-6 max-w-md">
               Leading OEM manufacturer of premium nicotine pouches with over 15 years of experience 
@@ -98,7 +97,7 @@ const Footer = ({ onContactClick }: { onContactClick: () => void }) => {
         <div className="border-t border-white/20 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-white/60 text-sm">
-              © 2024 Corbett Labs. All rights reserved. Leading OEM Innovation Since 2009.
+              © 2024 Corbett Industries. All rights reserved. Leading OEM Innovation Since 2009.
             </div>
             <div className="flex space-x-6 text-sm text-white/60">
               <a href="#" className="hover:text-sky-glow transition-colors">Privacy Policy</a>

@@ -144,11 +144,11 @@ const ContactModal: React.FC<ContactModalProps> = ({
                 </div>
                 <div>
                   <h4 className="font-medium text-deep-navy">Sales Team</h4>
-                  <p className="text-cool-grey">+46 8 123 4567<br />sales@corbettlabs.com</p>
+                  <p className="text-cool-grey">+46 8 123 4567<br />sales@corbettindustries.com</p>
                 </div>
                 <div>
                   <h4 className="font-medium text-deep-navy">Technical Support</h4>
-                  <p className="text-cool-grey">+46 8 123 4568<br />technical@corbettlabs.com</p>
+                  <p className="text-cool-grey">+46 8 123 4568<br />technical@corbettindustries.com</p>
                 </div>
               </div>
             </div>

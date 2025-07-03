@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 
 const stats = [
@@ -61,7 +60,7 @@ const AboutSection = () => {
       <div className="container-max">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-deep-navy mb-6">
-            Corbett Labs - Leading OEM Innovation Since 2009
+            Corbett Industries - Leading OEM Innovation Since 2009
           </h2>
           <p className="text-xl text-cool-grey max-w-4xl mx-auto">
             Built on a foundation of scientific excellence and manufacturing precision, we've grown 
