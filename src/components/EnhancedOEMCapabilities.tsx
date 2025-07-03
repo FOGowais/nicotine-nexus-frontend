@@ -108,7 +108,7 @@ const EnhancedOEMCapabilities = () => {
                     </div>
                     <div className="hidden lg:block w-full max-w-[520px]">
                       <img 
-                        src="/lovable-uploads/your%20brand.png" 
+                        src="/lovable-uploads/YourBrand.png" 
                         alt="Your Brand"
                         className="rounded-xl shadow-lg w-full h-full object-cover"
                         style={{ minHeight: '100%', maxHeight: '340px', background: '#fff' }}
