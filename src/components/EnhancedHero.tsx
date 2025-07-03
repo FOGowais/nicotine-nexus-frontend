@@ -148,7 +148,12 @@ const EnhancedHero = () => {
           alt="Hero Product"
           style={{ display: 'block', margin: '2rem auto 0', maxWidth: '650px', width: '100%', pointerEvents: 'none' }}
         />
-        <h1 style={{ color: '#b4f4f0', textShadow: '0 2px 8px rgba(10, 24, 61, 0.3)', fontSize: '4rem' }}>
+        <h1 style={{ 
+          color: '#ffffff', 
+          textShadow: '0 0 20px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 0, 0, 0.6), 0 2px 4px rgba(0, 0, 0, 0.9), 2px 2px 0px rgba(0, 0, 0, 0.5)', 
+          fontSize: '4rem',
+          fontWeight: 'bold'
+        }}>
           Branded By<br />You
         </h1>
       </div>
